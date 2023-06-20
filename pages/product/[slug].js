@@ -1,16 +1,21 @@
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
 import data from '@/utils/data';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
+import { Store } from '@/utils/Store';
+import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 
-// Load product details
 const ProductScreen = () => {
+  const { state, dispatch } = useContext(Store);
+
+  // Load product
   const { query } = useRouter();
   const { slug } = query;
   const product = data.products.find((x) => x.slug === slug);
 
+  // Product not found error
   if (!product) {
     return (
       <div className="p-4">
@@ -20,6 +25,18 @@ const ProductScreen = () => {
     );
   }
 
+  // Add to cart functionality
+  const addToCartHandler = () => {
+    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+
+    if (product.countInStock < quantity) {
+      return toast.error('Sorry. Product is out of stock');
+    }
+
+    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+  };
+
   return (
     <Layout title={product.name}>
       <div className="py-2">
@@ -27,7 +44,7 @@ const ProductScreen = () => {
       </div>
 
       <div className="grid md:grid-cols-4 md:gap-3">
-        {/* product image */}
+        {/* Product image */}
         <div className="md:col-span-2">
           <Image
             src={product.image}
@@ -42,7 +59,7 @@ const ProductScreen = () => {
           ></Image>
         </div>
 
-        {/* product info */}
+        {/* Product details */}
         <div>
           <ul>
             <li>
@@ -57,7 +74,7 @@ const ProductScreen = () => {
           </ul>
         </div>
 
-        {/* product price, availability and add to cart action */}
+        {/* Product price, availability and add to cart action */}
         <div>
           <div className="card p-5">
             <div className="mb-2 flex justify-between">
@@ -70,7 +87,12 @@ const ProductScreen = () => {
               <div>{product.countInStock > 0 ? 'In stock' : 'Unavailable'}</div>
             </div>
 
-            <button className="primary-button w-full">Add to cart</button>
+            <button
+              className="primary-button w-full"
+              onClick={addToCartHandler}
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>

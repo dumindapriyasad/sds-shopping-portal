@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-// Create a product thumbnail
+// Create product thumbnail
 const ProductItem = ({ product }) => {
   return (
     <div className="card">
@@ -13,6 +13,7 @@ const ProductItem = ({ product }) => {
           className="rounded shadow object-cover h-64 w-full"
         />
       </Link>
+
       <div className="flex flex-col items-center justify-center p-5">
         <Link href={`/product/${product.slug}`}>
           <h2 className="text-lg">{product.name}</h2>

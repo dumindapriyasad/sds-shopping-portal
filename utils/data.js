@@ -9,7 +9,7 @@ const data = {
       brand: 'Huda Beauty',
       rating: 4.5,
       numReviews: 8,
-      countInStock: 20,
+      countInStock: 5,
       description: 'Huda Beauty Naughty Makeup Set',
     },
     {
@@ -21,7 +21,7 @@ const data = {
       brand: 'RENEE',
       rating: 4.5,
       numReviews: 8,
-      countInStock: 20,
+      countInStock: 10,
       description: 'RENEE Madness PH Lipstick',
     },
     {
@@ -33,7 +33,7 @@ const data = {
       brand: 'KRYOLAN',
       rating: 4.5,
       numReviews: 8,
-      countInStock: 20,
+      countInStock: 15,
       description: 'Kryolan Tv Foundasion Stick Oriental',
     },
     {
@@ -45,7 +45,7 @@ const data = {
       brand: 'Miss Rose',
       rating: 4.5,
       numReviews: 8,
-      countInStock: 20,
+      countInStock: 12,
       description: 'Miss Rose Waterproof Eyeliner',
     },
     {
@@ -57,7 +57,7 @@ const data = {
       brand: 'Menggh',
       rating: 4.5,
       numReviews: 8,
-      countInStock: 20,
+      countInStock: 22,
       description: 'Menggh 24pcs With Glue False Nails',
     },
     {
@@ -69,7 +69,7 @@ const data = {
       brand: 'BELLOSÉ',
       rating: 4.5,
       numReviews: 8,
-      countInStock: 20,
+      countInStock: 6,
       description: 'BELLOSÉ Shampoo + Conditioner',
     },
   ],
