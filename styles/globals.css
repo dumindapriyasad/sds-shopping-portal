@@ -109,3 +109,12 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Product thumbnail */
+.card {
+  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
+}
+
+.primary-button {
+  @apply rounded bg-cyan-300 py-2 px-4 shadow outline-none hover:bg-cyan-400  active:bg-cyan-500;
+}
