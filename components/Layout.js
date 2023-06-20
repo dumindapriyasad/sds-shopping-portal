@@ -20,6 +20,7 @@ const Layout = ({ title, children }) => {
         <header>
           {/* Navbar */}
           <nav className="flex h-12 justify-between items-center px-4 shadow-md">
+            {/* Logo */}
             <Link href="/" className="text-lg font-bold">
               SDS Shopping Portal
             </Link>

@@ -1,7 +1,3 @@
-// import Head from 'next/head';
-// import { Inter } from 'next/font/google';
-// const inter = Inter({ subsets: ['latin'] });
-
 import Layout from '@/components/Layout';
 import ProductItem from '@/components/ProductItem';
 import data from '@/utils/data';
