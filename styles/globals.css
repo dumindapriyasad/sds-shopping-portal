@@ -110,11 +110,17 @@ a {
   }
 }
 
-/* Product thumbnail */
+/* Custom styles */
 .card {
   @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
 }
 
 .primary-button {
   @apply rounded bg-cyan-300 py-2 px-4 shadow outline-none hover:bg-cyan-400  active:bg-cyan-500;
+}
+
+input,
+select,
+textarea {
+  @apply rounded border p-2  outline-none ring-cyan-500  focus:ring;
 }
