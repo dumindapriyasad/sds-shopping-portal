@@ -1,3 +1,5 @@
+// Shopping cart
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -7,7 +9,6 @@ import React, { useContext } from 'react';
 import XCircleIcon from '@heroicons/react/24/outline/XCircleIcon';
 import dynamic from 'next/dynamic';
 
-// Shopping cart
 function CartScreen() {
   const { state, dispatch } = useContext(Store);
 
