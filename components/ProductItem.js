@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 // Create product thumbnail
-const ProductItem = ({ product }) => {
+export default function ProductItem({ product }) {
   return (
     <div className="card">
       <Link href={`/product/${product.slug}`}>
@@ -26,6 +26,4 @@ const ProductItem = ({ product }) => {
       </div>
     </div>
   );
-};
-
-export default ProductItem;
+}

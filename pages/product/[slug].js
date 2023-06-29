@@ -7,7 +7,7 @@ import { Store } from '@/utils/Store';
 import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 
-const ProductScreen = () => {
+export default function ProductScreen() {
   const { state, dispatch } = useContext(Store);
 
   const router = useRouter();
@@ -101,6 +101,4 @@ const ProductScreen = () => {
       </div>
     </Layout>
   );
-};
-
-export default ProductScreen;
+}
