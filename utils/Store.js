@@ -40,6 +40,17 @@ function reducer(state, action) {
       return { ...state, cart: { ...state.cart, cartItems } };
     }
 
+    // Reset cart
+    case 'CART_RESET':
+      return {
+        ...state,
+        cart: {
+          cartItems: [],
+          shippingAddress: { location: {} },
+          paymentMethod: '',
+        },
+      };
+
     default:
       return state;
   }
