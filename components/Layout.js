@@ -8,6 +8,7 @@ import { Menu } from '@headlessui/react';
 import DropdownLink from './DropdownLink';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Image from 'next/image';
 
 // Site layout
 export default function Layout({ title, children }) {
@@ -47,10 +48,15 @@ export default function Layout({ title, children }) {
       <div className="flex min-h-screen flex-col justify-between">
         <header>
           {/* Navbar */}
-          <nav className="flex h-20 justify-between items-center px-4 shadow-md">
+          <nav className="flex justify-between items-center px-4 py-3 shadow-md">
             {/* Logo */}
             <Link href="/" className="text-lg font-bold">
-              SDS Shopping Portal
+              <Image
+                src="/images/sds-logo.png"
+                alt="Logo"
+                width="150"
+                height="52"
+              ></Image>
             </Link>
 
             <div className="font-medium">
