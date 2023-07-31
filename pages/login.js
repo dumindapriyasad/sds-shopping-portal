@@ -20,7 +20,7 @@ export default function LoginScreen() {
     }
   }, [router, session, redirect]);
 
-  // initialize React Hook Form
+  // Initialize react hook form
   const {
     handleSubmit,
     register,
@@ -35,6 +35,7 @@ export default function LoginScreen() {
         email,
         password,
       });
+
       if (result.error) {
         toast.error(result.error);
       }
@@ -80,7 +81,10 @@ export default function LoginScreen() {
             type="password"
             {...register('password', {
               required: 'Please enter password',
-              minLength: { value: 6, message: 'password is more than 5 chars' },
+              minLength: {
+                value: 6,
+                message: 'Password must be 06 characters or more',
+              },
             })}
             className="w-full"
             id="password"

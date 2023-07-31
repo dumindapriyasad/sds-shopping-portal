@@ -1,13 +1,15 @@
+// Store context (manage state globally)
+
 import { createContext, useReducer } from 'react';
 import Cookies from 'js-cookie';
 
 export const Store = createContext();
 
-// Retreive cart items in cookies
+// Retreive cart items and Shipping Address in cookies
 const initialState = {
   cart: Cookies.get('cart')
     ? JSON.parse(Cookies.get('cart'))
-    : { cartItems: [] },
+    : { cartItems: [], shippingAddress: {} },
 };
 
 // Cart functionality
@@ -48,6 +50,19 @@ function reducer(state, action) {
           cartItems: [],
           shippingAddress: { location: {} },
           paymentMethod: '',
+        },
+      };
+
+    // Save shipping address
+    case 'SAVE_SHIPPING_ADDRESS':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: {
+            ...state.cart.shippingAddress,
+            ...action.payload,
+          },
         },
       };
 
