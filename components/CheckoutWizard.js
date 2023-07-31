@@ -1,4 +1,4 @@
-// Checkout Wizard
+// Checkout wizard (steps)
 
 import React from 'react';
 

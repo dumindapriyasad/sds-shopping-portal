@@ -1,4 +1,4 @@
-// Shipping Screen
+// Checkout wizard - shipping screen
 
 import React, { useContext, useEffect } from 'react';
 import Layout from '@/components/Layout';
