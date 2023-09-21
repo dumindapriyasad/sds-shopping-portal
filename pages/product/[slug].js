@@ -2,37 +2,35 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
-import data from '@/utils/data';
 import { Store } from '@/utils/Store';
 import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
+import db from '@/utils/db';
+import Product from '@/models/Product';
+import axios from 'axios';
 
-export default function ProductScreen() {
+export default function ProductScreen(props) {
+  const { product } = props;
   const { state, dispatch } = useContext(Store);
-
   const router = useRouter();
-
-  // Load product
-  const { query } = useRouter();
-  const { slug } = query;
-  const product = data.products.find((x) => x.slug === slug);
 
   // Product not found error
   if (!product) {
     return (
-      <div className="p-4">
+      <Layout title="Product Not Found">
         <p className="inline-block pe-1">Product Not Found |</p>
         <Link href="/">Back to products</Link>
-      </div>
+      </Layout>
     );
   }
 
   // Add to cart functionality
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
 
-    if (product.countInStock < quantity) {
+    if (data.countInStock < quantity) {
       return toast.error('Sorry. Product is out of stock');
     }
 
@@ -101,4 +99,19 @@ export default function ProductScreen() {
       </div>
     </Layout>
   );
+}
+
+// Get product slug from context and load product from DB
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    },
+  };
 }
