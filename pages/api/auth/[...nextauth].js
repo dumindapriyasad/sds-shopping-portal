@@ -22,6 +22,7 @@ export default NextAuth({
       return session;
     },
   },
+  secret: process.env.SECRET,
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
