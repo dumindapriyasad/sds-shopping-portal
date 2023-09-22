@@ -1,81 +1,73 @@
-// Checkout wizard - place order screen
+// Checkout wizard - order summary screen
 
-import CheckoutWizard from '@/components/CheckoutWizard';
 import Layout from '@/components/Layout';
-import { Store } from '@/utils/Store';
 import { getError } from '@/utils/error';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect, useContext } from 'react';
-import { toast } from 'react-toastify';
+import { useEffect, useReducer } from 'react';
 
-export default function PlaceOrderScreen() {
-  const { state, dispatch } = useContext(Store);
-  const { cart } = state;
-  const { cartItems, shippingAddress, paymentMethod } = cart;
+function reducer(state, action) {
+  switch (action.type) {
+    case 'FETCH_REQUEST':
+      return { ...state, loading: true, error: '' };
+    case 'FETCH_SUCCESS':
+      return { ...state, loading: false, order: action.payload, error: '' };
+    case 'FETCH_FAIL':
+      return { ...state, loading: false, error: action.payload };
+    default:
+      state;
+  }
+}
 
-  // Round item price
-  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
-  const itemsPrice = round2(
-    cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
-  ); // ex: 123.4567 => 123.46
-
-  // Calculate shipping price, tax price and total price
-  const shippingPrice = itemsPrice > 200 ? 0 : 5;
-  const taxPrice = round2(itemsPrice * 0.05);
-  const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
-
-  const router = useRouter();
+function OrderScreen() {
+  const { query } = useRouter();
+  const orderId = query.id;
+  const [{ loading, error, order }, dispatch] = useReducer(reducer, {
+    loading: true,
+    order: {},
+    error: '',
+  });
 
   useEffect(() => {
-    if (!paymentMethod) {
-      router.push('/payment');
-    }
-  }, [paymentMethod, router]);
+    const fetchOrder = async () => {
+      try {
+        dispatch({ type: 'FETCH_REQUEST' });
+        const { data } = await axios.get(`/api/orders/${orderId}`);
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      } catch (err) {
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+      }
+    };
 
-  const [loading, setLoading] = useState(false);
-
-  const placeOrderHandler = async () => {
-    try {
-      setLoading(true);
-      const { data } = await axios.post('/api/orders', {
-        orderItems: cartItems,
-        shippingAddress,
-        paymentMethod,
-        itemsPrice,
-        shippingPrice,
-        taxPrice,
-        totalPrice,
-      });
-      setLoading(false);
-      dispatch({ type: 'CART_CLEAR_ITEMS' });
-      Cookies.set(
-        'cart',
-        JSON.stringify({
-          ...cart,
-          cartItems: [],
-        })
-      );
-      router.push(`/order/${data._id}`);
-    } catch (err) {
-      setLoading(false);
-      toast.error(getError(err));
+    if (!order._id || (order._id && order._id !== orderId)) {
+      fetchOrder();
     }
-  };
+  }, [order, orderId]);
+
+  const {
+    shippingAddress,
+    paymentMethod,
+    orderItems,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+    isPaid,
+    paidAt,
+    isDelivered,
+    deliveredAt,
+  } = order;
 
   return (
-    <Layout title="Place Order">
-      <CheckoutWizard activeStep={3} />
+    <Layout title={`Order ${orderId}`}>
+      <h1 className="mb-4 text-xl">{`Order ${orderId}`}</h1>
 
-      <h1 className="mb-4 text-xl">Place Order</h1>
-
-      {cartItems.length === 0 ? (
-        <div>
-          Cart is empty. <Link href="/">Go shopping</Link>
-        </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div className="alert-error">{error}</div>
       ) : (
         <div className="grid md:grid-cols-4 md:gap-5">
           <div className="overflow-x-auto md:col-span-3">
@@ -88,23 +80,22 @@ export default function PlaceOrderScreen() {
                 {shippingAddress.country}
               </div>
 
-              <div>
-                <Link style={{ color: '#06b6d4' }} href="/shipping">
-                  Edit
-                </Link>
-              </div>
+              {isDelivered ? (
+                <div className="alert-success">Delivered at {deliveredAt}</div>
+              ) : (
+                <div className="alert-error">Not delivered</div>
+              )}
             </div>
 
             <div className="card p-5">
               <h2 className="mb-2 text-lg">Payment Method</h2>
 
               <div>{paymentMethod}</div>
-
-              <div>
-                <Link style={{ color: '#06b6d4' }} href="/payment">
-                  Edit
-                </Link>
-              </div>
+              {isPaid ? (
+                <div className="alert-success">Paid at {paidAt}</div>
+              ) : (
+                <div className="alert-error">Not paid</div>
+              )}
             </div>
 
             <div className="card overflow-x-auto p-5">
@@ -121,7 +112,7 @@ export default function PlaceOrderScreen() {
                 </thead>
 
                 <tbody>
-                  {cartItems.map((item) => (
+                  {orderItems.map((item) => (
                     <tr key={item._id} className="border-b">
                       <td>
                         <Link
@@ -138,6 +129,7 @@ export default function PlaceOrderScreen() {
                               height: 'auto',
                             }}
                           ></Image>
+                          &nbsp;
                           {item.name}
                         </Link>
                       </td>
@@ -150,11 +142,6 @@ export default function PlaceOrderScreen() {
                   ))}
                 </tbody>
               </table>
-              <div>
-                <Link style={{ color: '#06b6d4' }} href="/cart">
-                  Edit
-                </Link>
-              </div>
             </div>
           </div>
 
@@ -168,37 +155,24 @@ export default function PlaceOrderScreen() {
                     <div>Items</div>
                     <div>${itemsPrice}</div>
                   </div>
-                </li>
-
+                </li>{' '}
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Tax</div>
                     <div>${taxPrice}</div>
                   </div>
                 </li>
-
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Shipping</div>
                     <div>${shippingPrice}</div>
                   </div>
                 </li>
-
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Total</div>
                     <div>${totalPrice}</div>
                   </div>
-                </li>
-
-                <li>
-                  <button
-                    disabled={loading}
-                    onClick={placeOrderHandler}
-                    className="primary-button w-full"
-                  >
-                    {loading ? 'Loading...' : 'Place Order'}
-                  </button>
                 </li>
               </ul>
             </div>
@@ -209,5 +183,7 @@ export default function PlaceOrderScreen() {
   );
 }
 
+export default OrderScreen;
+
 // Protected page (login required)
-PlaceOrderScreen.auth = true;
+OrderScreen.auth = true;
