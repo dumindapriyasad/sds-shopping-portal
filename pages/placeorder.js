@@ -24,7 +24,7 @@ export default function PlaceOrderScreen() {
   ); // ex: 123.4567 => 123.46
 
   // Calculate shipping price, tax price and total price
-  const shippingPrice = itemsPrice > 200 ? 0 : 5;
+  const shippingPrice = itemsPrice > 100 ? 0 : 5;
   const taxPrice = round2(itemsPrice * 0.05);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
 
@@ -138,6 +138,7 @@ export default function PlaceOrderScreen() {
                               height: 'auto',
                             }}
                           ></Image>
+                          &nbsp;
                           {item.name}
                         </Link>
                       </td>
@@ -161,6 +162,9 @@ export default function PlaceOrderScreen() {
           <div>
             <div className="card p-5">
               <h2 className="mb-2 text-lg">Order Summary</h2>
+              <h3 className="mb-2 text-sm text-cyan-600">
+                (Free shipping on orders above $100)
+              </h3>
 
               <ul>
                 <li>
