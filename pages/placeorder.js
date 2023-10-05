@@ -89,7 +89,7 @@ export default function PlaceOrderScreen() {
               </div>
 
               <div>
-                <Link style={{ color: '#06b6d4' }} href="/shipping">
+                <Link className="text-cyan-500" href="/shipping">
                   Edit
                 </Link>
               </div>
@@ -101,7 +101,7 @@ export default function PlaceOrderScreen() {
               <div>{paymentMethod}</div>
 
               <div>
-                <Link style={{ color: '#06b6d4' }} href="/payment">
+                <Link className="text-cyan-500" href="/payment">
                   Edit
                 </Link>
               </div>
@@ -152,7 +152,7 @@ export default function PlaceOrderScreen() {
                 </tbody>
               </table>
               <div>
-                <Link style={{ color: '#06b6d4' }} href="/cart">
+                <Link className="text-cyan-500" href="/cart">
                   Edit
                 </Link>
               </div>

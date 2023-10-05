@@ -42,7 +42,10 @@ function CartScreen() {
 
       {cartItems.length === 0 ? (
         <div>
-          Cart is empty. <Link href="/">Go shopping</Link>
+          Cart is empty.{' '}
+          <Link href="/" className="text-cyan-500">
+            Go shopping
+          </Link>
         </div>
       ) : (
         <div className="grid md:grid-cols-4 md:gap-5">

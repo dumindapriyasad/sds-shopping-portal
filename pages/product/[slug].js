@@ -19,7 +19,9 @@ export default function ProductScreen(props) {
     return (
       <Layout title="Product Not Found">
         <p className="inline-block pe-1">Product Not Found |</p>
-        <Link href="/">Back to products</Link>
+        <Link href="/" className="text-cyan-500">
+          Back to products
+        </Link>
       </Layout>
     );
   }
@@ -41,7 +43,9 @@ export default function ProductScreen(props) {
   return (
     <Layout title={product.name}>
       <div className="py-2">
-        <Link href="/">Back to products</Link>
+        <Link href="/" className="text-cyan-500">
+          Back to products
+        </Link>
       </div>
 
       <div className="grid md:grid-cols-4 md:gap-3">
