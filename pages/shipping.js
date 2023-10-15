@@ -9,6 +9,11 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 
 export default function ShippingScreen() {
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
+  const { shippingAddress } = cart;
+  const router = useRouter();
+
   // Initialize react hook form
   const {
     handleSubmit,
@@ -25,11 +30,6 @@ export default function ShippingScreen() {
 
     return true;
   };
-
-  const { state, dispatch } = useContext(Store);
-  const { cart } = state;
-  const { shippingAddress } = cart;
-  const router = useRouter();
 
   // Fill input boxes based on the previous data in react context at the beginning of loading this component
   useEffect(() => {

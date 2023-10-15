@@ -26,6 +26,7 @@ function OrderHistoryScreen() {
     error: '',
   });
 
+  // Get orders history
   useEffect(() => {
     const fetchOrders = async () => {
       try {

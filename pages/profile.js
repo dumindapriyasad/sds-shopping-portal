@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 export default function ProfileScreen() {
   const { data: session } = useSession();
 
+  // Initialize react hook form
   const {
     handleSubmit,
     register,
@@ -28,11 +29,13 @@ export default function ProfileScreen() {
     return true;
   };
 
+  // Update name and email in session
   useEffect(() => {
     setValue('name', session.user.name);
     setValue('email', session.user.email);
   }, [session.user, setValue]);
 
+  // Update profile functionality
   const submitHandler = async ({ name, email, password }) => {
     try {
       await axios.put('/api/auth/update', {
@@ -67,6 +70,7 @@ export default function ProfileScreen() {
 
         <div className="mb-4">
           <label htmlFor="name">Name</label>
+
           <input
             type="text"
             className="w-full"
@@ -88,6 +92,7 @@ export default function ProfileScreen() {
 
         <div className="mb-4">
           <label htmlFor="email">Email</label>
+
           <input
             type="email"
             className="w-full"
@@ -107,6 +112,7 @@ export default function ProfileScreen() {
 
         <div className="mb-4">
           <label htmlFor="password">New Password</label>
+
           <input
             className="w-full"
             type="password"
@@ -126,6 +132,7 @@ export default function ProfileScreen() {
 
         <div className="mb-4">
           <label htmlFor="confirmPassword">Confirm New Password</label>
+
           <input
             className="w-full"
             type="password"

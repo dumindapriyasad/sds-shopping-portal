@@ -1,4 +1,4 @@
-// Checkout wizard - order summary screen
+// Checkout wizard - order summary screen (Using dynamic routes)
 
 import Layout from '@/components/Layout';
 import { getError } from '@/utils/error';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
 
+// Functionalities
 function reducer(state, action) {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -32,7 +33,6 @@ function reducer(state, action) {
 }
 
 function OrderScreen() {
-  // order/:id
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const { query } = useRouter();
   const orderId = query.id;
@@ -42,7 +42,21 @@ function OrderScreen() {
       order: {},
       error: '',
     });
+  const {
+    shippingAddress,
+    paymentMethod,
+    orderItems,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+    isPaid,
+    paidAt,
+    isDelivered,
+    deliveredAt,
+  } = order;
 
+  // Get order details with payment details
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -75,20 +89,7 @@ function OrderScreen() {
     }
   }, [order, orderId, paypalDispatch, successPay]);
 
-  const {
-    shippingAddress,
-    paymentMethod,
-    orderItems,
-    itemsPrice,
-    taxPrice,
-    shippingPrice,
-    totalPrice,
-    isPaid,
-    paidAt,
-    isDelivered,
-    deliveredAt,
-  } = order;
-
+  // Creat PayPal order
   function createOrder(data, actions) {
     return actions.order
       .create({
@@ -103,6 +104,7 @@ function OrderScreen() {
       });
   }
 
+  // PayPal order approval status (pay order)
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
@@ -120,6 +122,7 @@ function OrderScreen() {
     });
   }
 
+  // PayPal error status
   function onError(err) {
     toast.error(getError(err));
   }
@@ -155,6 +158,7 @@ function OrderScreen() {
               <h2 className="mb-2 text-lg">Payment Method</h2>
 
               <div>{paymentMethod}</div>
+
               {isPaid ? (
                 <div className="alert-success">Paid at {paidAt}</div>
               ) : (
@@ -219,25 +223,29 @@ function OrderScreen() {
                     <div>Items</div>
                     <div>${itemsPrice}</div>
                   </div>
-                </li>{' '}
+                </li>
+
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Tax</div>
                     <div>${taxPrice}</div>
                   </div>
                 </li>
+
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Shipping</div>
                     <div>${shippingPrice}</div>
                   </div>
                 </li>
+
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Total</div>
                     <div>${totalPrice}</div>
                   </div>
                 </li>
+
                 {!isPaid && (
                   <li>
                     {isPending ? (

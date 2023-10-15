@@ -37,7 +37,7 @@ export default function PaymentScreen() {
     router.push('/placeorder');
   };
 
-  // Check shipping address is entered and save payment method
+  // Check shipping address is entered and save payment method. Redirect if shipping address not entered
   useEffect(() => {
     if (!shippingAddress.address) {
       return router.push('/shipping');

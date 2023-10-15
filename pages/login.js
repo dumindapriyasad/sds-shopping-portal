@@ -11,7 +11,6 @@ import { toast } from 'react-toastify';
 
 export default function LoginScreen() {
   const { data: session } = useSession();
-
   const router = useRouter();
   const { redirect } = router.query;
 
