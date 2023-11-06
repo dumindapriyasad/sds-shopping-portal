@@ -50,7 +50,7 @@ export default function ProductScreen(props) {
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-4 md:gap-3">
+      <div className="grid md:grid-cols-4 md:gap-3 mb-4">
         {/* Product image */}
         <div className="md:col-span-2">
           <Image

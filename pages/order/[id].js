@@ -294,7 +294,7 @@ function OrderScreen() {
                   </div>
                 </li>
 
-                {!isPaid && (
+                {!isPaid && !session.user.isAdmin && (
                   <li>
                     {isPending ? (
                       <div>Loading...</div>
@@ -310,7 +310,7 @@ function OrderScreen() {
                     {loadingPay && <div>Loading...</div>}
                   </li>
                 )}
-                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                {session.user.isAdmin && !order.isDelivered && (
                   <li>
                     {loadingDeliver && <div>Loading...</div>}
                     <button
