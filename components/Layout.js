@@ -11,12 +11,16 @@ import DropdownLink from './DropdownLink';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import SearchIcon from '@heroicons/react/24/outline/MagnifyingGlassIcon';
 
 export default function Layout({ title, children }) {
   const { status, data: session } = useSession();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const [cartItemsCount, setCartItemsCount] = useState(0);
+  const [query, setQuery] = useState('');
+  const router = useRouter();
 
   // Keep update cart items
   useEffect(() => {
@@ -28,6 +32,12 @@ export default function Layout({ title, children }) {
     Cookies.remove('cart');
     dispatch({ type: 'CART_RESET' });
     signOut({ callbackUrl: '/login' });
+  };
+
+  // Search functionality
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
   };
 
   return (
@@ -58,6 +68,26 @@ export default function Layout({ title, children }) {
                 height="52"
               ></Image>
             </Link>
+
+            {/* Search box */}
+            <form
+              onSubmit={submitHandler}
+              className="mx-auto  hidden  justify-center md:flex"
+            >
+              <input
+                onChange={(e) => setQuery(e.target.value)}
+                type="text"
+                className="rounded-tr-none rounded-br-none p-1 text-sm dark:text-black focus:ring-0"
+                placeholder="Search products"
+              />
+              <button
+                className="rounded rounded-tl-none rounded-bl-none bg-cyan-500 p-1 text-sm dark:text-black"
+                type="submit"
+                id="button-addon2"
+              >
+                <SearchIcon className="h-5 w-5"></SearchIcon>
+              </button>
+            </form>
 
             <div className="font-medium">
               {/* Shopping cart */}
