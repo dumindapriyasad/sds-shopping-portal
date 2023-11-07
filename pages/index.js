@@ -39,7 +39,7 @@ export default function Home({ products }) {
       >
         <div>
           <Image
-            src="/images/c-img-01.jpg"
+            src="/images/c01.jpeg"
             alt="Carousel Image 01"
             width={640}
             height={640}
@@ -50,7 +50,7 @@ export default function Home({ products }) {
 
         <div>
           <Image
-            src="/images/c-img-02.jpg"
+            src="/images/c02.jpeg"
             alt="Carousel Image 02"
             width={640}
             height={640}
@@ -61,7 +61,7 @@ export default function Home({ products }) {
 
         <div>
           <Image
-            src="/images/c-img-03.jpg"
+            src="/images/c03.jpeg"
             alt="Carousel Image 03"
             width={640}
             height={640}
@@ -72,7 +72,7 @@ export default function Home({ products }) {
 
         <div>
           <Image
-            src="/images/c-img-04.jpg"
+            src="/images/c04.jpeg"
             alt="Carousel Image 04"
             width={640}
             height={640}
@@ -83,7 +83,7 @@ export default function Home({ products }) {
 
         <div>
           <Image
-            src="/images/c-img-05.jpg"
+            src="/images/c05.jpeg"
             alt="Carousel Image 05"
             width={640}
             height={640}
