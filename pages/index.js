@@ -6,6 +6,9 @@ import db from '@/utils/db';
 import axios from 'axios';
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
@@ -27,6 +30,71 @@ export default function Home({ products }) {
 
   return (
     <Layout title="Home Page">
+      {/* Carousel */}
+      <Carousel
+        showThumbs={false}
+        showStatus={false}
+        autoPlay={true}
+        infiniteLoop={true}
+      >
+        <div>
+          <Image
+            src="/images/c-img-01.jpg"
+            alt="Carousel Image 01"
+            width={640}
+            height={640}
+            priority={true}
+            className="carousel-image"
+          ></Image>
+        </div>
+
+        <div>
+          <Image
+            src="/images/c-img-02.jpg"
+            alt="Carousel Image 02"
+            width={640}
+            height={640}
+            priority={true}
+            className="carousel-image"
+          ></Image>
+        </div>
+
+        <div>
+          <Image
+            src="/images/c-img-03.jpg"
+            alt="Carousel Image 03"
+            width={640}
+            height={640}
+            priority={true}
+            className="carousel-image"
+          ></Image>
+        </div>
+
+        <div>
+          <Image
+            src="/images/c-img-04.jpg"
+            alt="Carousel Image 04"
+            width={640}
+            height={640}
+            priority={true}
+            className="carousel-image"
+          ></Image>
+        </div>
+
+        <div>
+          <Image
+            src="/images/c-img-05.jpg"
+            alt="Carousel Image 05"
+            width={640}
+            height={640}
+            priority={true}
+            className="carousel-image"
+          ></Image>
+        </div>
+      </Carousel>
+
+      <h2 className="h4 my-4">Latest Products</h2>
+
       {/* Load product thumbnails */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (

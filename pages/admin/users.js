@@ -150,4 +150,5 @@ function AdminUsersScreen() {
 
 export default AdminUsersScreen;
 
+// Protected page (admin login required)
 AdminUsersScreen.auth = { adminOnly: true };
