@@ -209,6 +209,7 @@ export default function Layout({ title, children }) {
                   alt="Logo"
                   width="150"
                   height="52"
+                  priority={true}
                 ></Image>
               </Link>
             </div>
