@@ -99,7 +99,7 @@ function CartScreen() {
                       </select>
                     </td>
 
-                    <td className="p-5 text-right">${item.price}</td>
+                    <td className="p-5 text-right">LKR {item.price}</td>
 
                     <td className="p-5 text-center">
                       <button onClick={() => removeItemHandler(item)}>
@@ -117,7 +117,8 @@ function CartScreen() {
             <ul>
               <li>
                 <div className="pb-3 text-xl">
-                  Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) : $
+                  Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)})
+                  {' : LKR '}
                   {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                 </div>
               </li>

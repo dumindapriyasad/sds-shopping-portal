@@ -101,7 +101,7 @@ export default function AdminOrderScreen() {
                         {order.createdAt.substring(0, 10)}
                       </td>
 
-                      <td className="p-5">${order.totalPrice}</td>
+                      <td className="p-5">LKR {order.totalPrice}</td>
 
                       <td className="p-5">
                         {order.isPaid

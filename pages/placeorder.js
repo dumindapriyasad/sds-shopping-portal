@@ -25,7 +25,7 @@ export default function PlaceOrderScreen() {
   );
 
   // Calculate shipping price, tax price and total price
-  const shippingPrice = itemsPrice > 100 ? 0 : 5;
+  const shippingPrice = itemsPrice >= 20000 ? 0 : 500;
   const taxPrice = round2(itemsPrice * 0.05);
   const totalPrice = round2(itemsPrice + shippingPrice + taxPrice);
 
@@ -142,9 +142,9 @@ export default function PlaceOrderScreen() {
                         </Link>
                       </td>
                       <td className="p-5 text-right">{item.quantity}</td>
-                      <td className="p-5 text-right">${item.price}</td>
+                      <td className="p-5 text-right">LKR {item.price}</td>
                       <td className="p-5 text-right">
-                        ${item.quantity * item.price}
+                        LKR {item.quantity * item.price}
                       </td>
                     </tr>
                   ))}
@@ -162,35 +162,35 @@ export default function PlaceOrderScreen() {
             <div className="card p-5">
               <h2 className="mb-2 text-lg">Order Summary</h2>
               <h3 className="mb-2 text-sm text-cyan-600">
-                (Free shipping on orders above $100)
+                (Free shipping on orders above LKR 20000)
               </h3>
 
               <ul>
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Items</div>
-                    <div>${itemsPrice}</div>
+                    <div>LKR {itemsPrice}</div>
                   </div>
                 </li>
 
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Tax</div>
-                    <div>${taxPrice}</div>
+                    <div>LKR {taxPrice}</div>
                   </div>
                 </li>
 
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Shipping</div>
-                    <div>${shippingPrice}</div>
+                    <div>LKR {shippingPrice}</div>
                   </div>
                 </li>
 
                 <li>
                   <div className="mb-2 flex justify-between">
                     <div>Total</div>
-                    <div>${totalPrice}</div>
+                    <div>LKR {totalPrice}</div>
                   </div>
                 </li>
 

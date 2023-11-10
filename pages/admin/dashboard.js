@@ -120,7 +120,7 @@ function AdminDashboardScreen() {
             <div>
               <div className="grid grid-cols-1 md:grid-cols-4">
                 <div className="card m-5 p-5">
-                  <p className="text-3xl">${Math.round(summary.ordersPrice)}</p>
+                  <p className="text-3xl">LKR {Math.round(summary.ordersPrice)}</p>
                   <p>Sales</p>
                   <Link href="/admin/orders">View sales</Link>
                 </div>

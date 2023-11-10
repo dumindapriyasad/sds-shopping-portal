@@ -15,16 +15,16 @@ const PAGE_SIZE = 2;
 
 const prices = [
   {
-    name: '$1 to $50',
-    value: '1-50',
+    name: 'LKR 1 to LKR 500',
+    value: '1-500',
   },
   {
-    name: '$51 to $200',
-    value: '51-200',
+    name: 'LKR 501 to LKR 1000',
+    value: '501-1000',
   },
   {
-    name: '$201 to $1000',
-    value: '201-1000',
+    name: 'LKR 1001 to $10000',
+    value: '1001-10000',
   },
 ];
 
