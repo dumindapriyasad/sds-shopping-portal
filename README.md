@@ -1,38 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Salon Delight Style E-Commerce Website
 
-## Getting Started
+## Proposed Solution
 
-First, run the development server:
+The Salon Delight Style E-Commerce Website is designed to provide customers with a seamless shopping experience for beauty products. The proposed solution includes the following features:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Product Browsing**: Customers can browse and search for products based on categories, brands, price ranges, and ratings.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **User Authentication**: Customers need to log in to proceed with the checkout process, or they can create a new account if they are not registered.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- **Checkout Process**: During checkout, customers provide shipping information, choose payment methods, and review the Order Summary before placing an order.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- **Modern Frontend Technologies**: The website is built using React.js, Next.js, Tailwind CSS, Headless UI, and HeroIcons for a visually appealing and user-friendly design.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **Data Management**: Cloudinary is used to manage and optimize images, MongoDB for data storage, Axios for API requests, and NextAuth.js for user authentication and authorization.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Secure Transactions**: PayPal is integrated as a secure payment gateway for online transactions.
 
-## Learn More
+- **Admin Dashboard**: Authorized personnel can log in to view reports, manage orders, and handle product listings efficiently.
 
-To learn more about Next.js, take a look at the following resources:
+- **Data Visualization**: React-Chart.js and Chart.js are used for real-time data visualizations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Deployment**: The website is hosted on GitHub and deployed using Vercel for serverless deployment.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Information about the Implemented Website
 
-## Deploy on Vercel
+### Customer Functionality:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Product Search and Filtering**: Customers can browse product categories, filter products, and sort based on various criteria.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. **Product Details Page**: Detailed information about a product, including images, description, reviews, and the option to add to the cart.
+
+3. **Shopping Cart**: Customers can manage their cart, adjust quantities, and proceed to checkout.
+
+4. **Checkout Process**: Log in or register, provide shipping information, select payment method, and review order details before placing an order.
+
+5. **Profile Management**: Customers can update profile details and view order history.
+
+6. **Order History**: View details of past orders, including order ID, date, total price, paid date, ordered items, and delivery status.
+
+7. **Payment Integration (PayPal)**: Seamless integration with PayPal for secure online payments.
+
+### Admin Functionality:
+
+1. **Admin Dashboard**: Log in with admin credentials to access reports on total sales, orders, products, users, and a sales report chart.
+
+2. **Order Management**: View and handle orders, change order delivery status to "delivered."
+
+3. **Product Management**: Create, view, edit, or delete products.
+
+4. **User Management**: View a list of all users, including admins and regular customers. Edit user details and change user permissions.
+
+## How to Run the Project
+
+1. Clone the repository: `git clone https://github.com/dumindapriyasad/sds-shopping-portal`
+
+2. Install dependencies: `npm install`
+
+3. Set up environment variables for API keys and configurations.
+
+4. Run the development server: `npm run dev`
+
+5. Open your browser and go to `http://localhost:3000` to view the website.
+
+## Technologies Used
+
+- React.js
+- Next.js
+- Tailwind CSS
+- Headless UI
+- HeroIcons
+- MongoDB
+- Axios
+- NextAuth.js
+- React Hook Form
+- Decrypt
+- Cloudinary
+- PayPal
+
+## Contributor/Developer
+
+- [Duminda Priyasad](https://github.com/dumindapriyasad)
